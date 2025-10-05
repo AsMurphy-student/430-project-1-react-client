@@ -11,9 +11,10 @@ function GetModule(props: {
     outputResult: string,
     outputResultHandler: React.Dispatch<React.SetStateAction<string>>,
     queryType: string,
+    queryURL: string,
   }) {
 
-  const { moduleState, moduleStateHandler, methodType, methodTypeHandler, searchTerm, searchTermHandler, outputResult, outputResultHandler, queryType } = props;
+  const { moduleState, moduleStateHandler, methodType, methodTypeHandler, searchTerm, searchTermHandler, outputResult, outputResultHandler, queryType, queryURL } = props;
 
   const searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     searchTermHandler(event.target.value);
@@ -58,13 +59,14 @@ function GetModule(props: {
               <input
                 name='title'
                 id='title'
+                value={searchTerm}
                 onChange={searchTermOnChange}
               />
               <label>{queryType}: </label>
             </p>
           </fieldset>
           <button className='text-white' onClick={async () => {
-              const response = await fetch(`/getBooksByTitle?${queryType}=${searchTerm}`, {
+              const response = await fetch(`${queryURL}?${queryType}=${searchTerm}`, {
                 method: methodType,
                 headers: {
                   'Accept': 'application/json',
@@ -104,28 +106,32 @@ function GetModule(props: {
 }
 
 function App() {
+  // Get All Use States
   const [getAllBooks, setGetAllBooks] = useState(false);
-  const [getAllBooksByTitle, setGetAllBooksByTitle] = useState(false);
-
   const [getAllBooksMethod, setGetAllBooksMethod] = useState('GET');
-  const [getAllBooksByTitleMethod, setGetAllBooksByTitleMethod] = useState('GET');
-
-  const [getAllBooksByTitleOption, setGetAllBooksByTitleOption] = useState('');
-
   const [getAllBooksOutput, setGetAllBooksOutput] = useState('');
-  const [getAllBooksByTitleOutput, setGetAllBooksByTitleOutput] = useState('');
 
   const getAllBooksHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGetAllBooksMethod(event.target.value);
   };
 
-  // const getAllBooksByTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setGetAllBooksByTitleMethod(event.target.value);
-  // };
+  // Get By Title Use States
+  const [getAllBooksByTitle, setGetAllBooksByTitle] = useState(false);
+  const [getAllBooksByTitleMethod, setGetAllBooksByTitleMethod] = useState('GET');
+  const [getAllBooksByTitleOption, setGetAllBooksByTitleOption] = useState('');
+  const [getAllBooksByTitleOutput, setGetAllBooksByTitleOutput] = useState('');
 
-  // const getAllBooksByTitleTitleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setGetAllBooksByTitleOption(event.target.value);
-  // }
+  // Get By Author Use States
+  const [getAllBooksByAuthor, setGetAllBooksByAuthor] = useState(false);
+  const [getAllBooksByAuthorMethod, setGetAllBooksByAuthorMethod] = useState('GET');
+  const [getAllBooksByAuthorOption, setGetAllBooksByAuthorOption] = useState('');
+  const [getAllBooksByAuthorOutput, setGetAllBooksByAuthorOutput] = useState('');
+
+  // Get By Year Use States
+  const [getAllBooksByYear, setGetAllBooksByYear] = useState(false);
+  const [getAllBooksByYearMethod, setGetAllBooksByYearMethod] = useState('GET');
+  const [getAllBooksByYearOption, setGetAllBooksByYearOption] = useState('');
+  const [getAllBooksByYearOutput, setGetAllBooksByYearOutput] = useState('');
 
   return (
     <div className='bg-black min-h-screen'>
@@ -281,7 +287,32 @@ function App() {
       searchTermHandler={setGetAllBooksByTitleOption} 
       outputResult={getAllBooksByTitleOutput} 
       outputResultHandler={setGetAllBooksByTitleOutput} 
-      queryType={'title'} />
+      queryType={'title'}
+      queryURL='/getBooksByTitle' />
+
+      <GetModule 
+      moduleState={getAllBooksByAuthor} 
+      moduleStateHandler={setGetAllBooksByAuthor} 
+      methodType={getAllBooksByAuthorMethod} 
+      methodTypeHandler={setGetAllBooksByAuthorMethod} 
+      searchTerm={getAllBooksByAuthorOption} 
+      searchTermHandler={setGetAllBooksByAuthorOption} 
+      outputResult={getAllBooksByAuthorOutput} 
+      outputResultHandler={setGetAllBooksByAuthorOutput} 
+      queryType={'author'}
+      queryURL='/getBooksByAuthor' />
+
+      <GetModule 
+      moduleState={getAllBooksByYear} 
+      moduleStateHandler={setGetAllBooksByYear} 
+      methodType={getAllBooksByYearMethod} 
+      methodTypeHandler={setGetAllBooksByYearMethod} 
+      searchTerm={getAllBooksByYearOption} 
+      searchTermHandler={setGetAllBooksByYearOption} 
+      outputResult={getAllBooksByYearOutput} 
+      outputResultHandler={setGetAllBooksByYearOutput} 
+      queryType={'year'}
+      queryURL='/getBooksByYear' />
     </div>
   )
 }
