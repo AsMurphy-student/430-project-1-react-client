@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import './App.css'
-// import type { Book } from './interfaces/book';
-// import BookList from './components/BookList';
 
 function App() {
   const [getAllBooks, setGetAllBooks] = useState(false);
@@ -32,7 +30,7 @@ function App() {
                 checked={getAllBooksMethod === 'GET'}
                 onChange={radioHandler}
               />
-              <label htmlFor="coffee">GET</label>
+              <label>GET</label>
             </p>
 
             <p className='text-white'>
@@ -44,7 +42,7 @@ function App() {
                 checked={getAllBooksMethod === 'HEAD'}
                 onChange={radioHandler}
               />
-              <label htmlFor="tea">HEAD</label>
+              <label>HEAD</label>
             </p>
           </fieldset>
           <button className='text-white' onClick={async () => {
@@ -70,15 +68,8 @@ function App() {
                 `;
 
                 setGetAllBooksOutput(output);
-
-                // if (jsonData.bookData)
-                //   setGetAllBooksOutput(jsonData.bookData);
-                // else
-                //   setGetAllBooksOutput([]);
               }
               else{
-                // console.log(response.headers.get('content-type'));
-                // console.log(response.headers.get('content-length'));
                 const output = `
                 Status: ${response.status}\n
                 Content-Length: ${response.headers.get('content-length')}
@@ -92,27 +83,6 @@ function App() {
           <p className='text-white whitespace-pre-wrap'>{getAllBooksOutput}</p>
         </div>
       }
-
-      {/* <div className="card">
-        <button className='text-white' onClick={async () => {
-          const response = await fetch('/getBooks', {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            },
-          });
-
-          if (!response.ok) {
-            console.log('error');
-          }
-          else {
-            const jsonData: Book[] = await response.json();
-            console.log(jsonData);
-          }
-        }}>
-          this is working
-        </button>
-      </div> */}
     </div>
   )
 }
