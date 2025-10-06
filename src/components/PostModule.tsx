@@ -1,3 +1,5 @@
+import type { BookParams } from "../interfaces/BookParams";
+
 function PostModule(props: { 
     moduleState: boolean, 
     moduleStateHandler: React.Dispatch<React.SetStateAction<boolean>>,
@@ -28,7 +30,20 @@ function PostModule(props: {
             {/* Put Input Fields Here */}
           </fieldset>
           <button className='text-white' onClick={async () => {
-            // Make Post request here
+            if (queryURL === '/addBook') {
+              const bookToAdd : BookParams = {
+                author: "",
+                country: "",
+                language: "",
+                link: "",
+                pages: 0,
+                title: "",
+                year: 0
+              }
+            }
+            else {
+
+            }
             // const fetchURL = searchTerm && searchTermHandler 
             // ? `${queryURL}?${queryType}=${searchTerm}`
             // : `${queryURL}`;
