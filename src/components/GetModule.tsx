@@ -100,7 +100,7 @@ function GetModule(props: {
             else if (response.body) {
               const jsonData = await response.json();
 
-              const output = '' +
+              const output = 
               `Status: ${response.status}\n` +
               `Content-Length: ${response.headers.get('content-length')}\n` +
               `Response: [${JSON.stringify(jsonData)}]`;
@@ -108,10 +108,9 @@ function GetModule(props: {
               outputResultHandler(output);
             }
             else{
-              const output = `
-              Status: ${response.status}\n
-              Content-Length: ${response.headers.get('content-length')}
-              `;
+              const output = 
+              `Status: ${response.status}\n` +
+              `Content-Length: ${response.headers.get('content-length')}`;
 
               outputResultHandler(output);
             }
