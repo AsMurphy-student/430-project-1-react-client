@@ -100,11 +100,10 @@ function GetModule(props: {
             else if (response.body) {
               const jsonData = await response.json();
 
-              const output = `
-              Status: ${response.status}\n
-              Content-Length: ${response.headers.get('content-length')}
-              Response: [${JSON.stringify(jsonData)}]
-              `;
+              const output = '' +
+              `Status: ${response.status}\n` +
+              `Content-Length: ${response.headers.get('content-length')}\n` +
+              `Response: [${JSON.stringify(jsonData)}]`;
 
               outputResultHandler(output);
             }
