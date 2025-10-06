@@ -3,18 +3,30 @@ function GetModule(props: {
     moduleStateHandler: React.Dispatch<React.SetStateAction<boolean>>,
     methodType: string,
     methodTypeHandler: React.Dispatch<React.SetStateAction<string>>,
-    searchTerm: string,
-    searchTermHandler: React.Dispatch<React.SetStateAction<string>>,
+    searchTerm?: string,
+    searchTermHandler?: React.Dispatch<React.SetStateAction<string>>,
     outputResult: string,
     outputResultHandler: React.Dispatch<React.SetStateAction<string>>,
-    queryType: string,
+    queryType?: string,
     queryURL: string,
+    getAll: boolean,
+    resetModules: () => void,
   }) {
 
-  const { moduleState, moduleStateHandler, methodType, methodTypeHandler, searchTerm, searchTermHandler, outputResult, outputResultHandler, queryType, queryURL } = props;
+  const { 
+    moduleState, moduleStateHandler, 
+    methodType, methodTypeHandler, 
+    searchTerm, searchTermHandler, 
+    outputResult, outputResultHandler, 
+    queryType, queryURL, 
+    getAll, resetModules } = props;
 
-  const searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    searchTermHandler(event.target.value);
+  let searchTermOnChange;
+
+  if (!getAll && searchTermHandler) {
+    searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      searchTermHandler(event.target.value);
+    }
   }
 
   const methodTypeOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +35,12 @@ function GetModule(props: {
 
   return (
     <>
-      <button className='text-white' onClick={() => moduleStateHandler(!moduleState)}>Get All Books By {queryType}</button>
+      <button className='text-white' onClick={() => {
+          if (!moduleState) {
+            resetModules();
+          }
+          moduleStateHandler(!moduleState)
+        }}>{queryType ? `Get All Books By ${queryType}` : 'Get All Books'}</button>
       <hr />
       {
         moduleState && 
@@ -52,46 +69,53 @@ function GetModule(props: {
               />
               <label>HEAD</label>
             </p>
-            <p className='text-white'>
-              <input
-                name='title'
-                id='title'
-                value={searchTerm}
-                onChange={searchTermOnChange}
-              />
-              <label>{queryType}: </label>
-            </p>
+            {
+              searchTermHandler &&
+              <p className='text-white'>
+                <input
+                  name='title'
+                  id='title'
+                  value={searchTerm}
+                  onChange={searchTermOnChange}
+                />
+                <label>{queryType}: </label>
+              </p>
+            }
           </fieldset>
           <button className='text-white' onClick={async () => {
-              const response = await fetch(`${queryURL}?${queryType}=${searchTerm}`, {
-                method: methodType,
-                headers: {
-                  'Accept': 'application/json',
-                },
-              });
+            const fetchURL = searchTerm && searchTermHandler 
+            ? `${queryURL}?${queryType}=${searchTerm}`
+            : `${queryURL}`;
 
-              if (!response.ok) {
-                console.log('error');
-              }
-              else if (response.body) {
-                const jsonData = await response.json();
+            const response = await fetch(fetchURL, {
+              method: methodType,
+              headers: {
+                'Accept': 'application/json',
+              },
+            });
 
-                const output = `
-                Status: ${response.status}\n
-                Content-Length: ${response.headers.get('content-length')}
-                Response: [${JSON.stringify(jsonData)}]
-                `;
+            if (!response.ok) {
+              console.log('error');
+            }
+            else if (response.body) {
+              const jsonData = await response.json();
 
-                outputResultHandler(output);
-              }
-              else{
-                const output = `
-                Status: ${response.status}\n
-                Content-Length: ${response.headers.get('content-length')}
-                `;
+              const output = `
+              Status: ${response.status}\n
+              Content-Length: ${response.headers.get('content-length')}
+              Response: [${JSON.stringify(jsonData)}]
+              `;
 
-                outputResultHandler(output);
-              }
+              outputResultHandler(output);
+            }
+            else{
+              const output = `
+              Status: ${response.status}\n
+              Content-Length: ${response.headers.get('content-length')}
+              `;
+
+              outputResultHandler(output);
+            }
             }}>
               Working?
             </button>

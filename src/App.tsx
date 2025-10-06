@@ -8,9 +8,9 @@ function App() {
   const [getAllBooksMethod, setGetAllBooksMethod] = useState('GET');
   const [getAllBooksOutput, setGetAllBooksOutput] = useState('');
 
-  const getAllBooksHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGetAllBooksMethod(event.target.value);
-  };
+  // const getAllBooksHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setGetAllBooksMethod(event.target.value);
+  // };
 
   // Get By Title Use States
   const [getAllBooksByTitle, setGetAllBooksByTitle] = useState(false);
@@ -30,11 +30,18 @@ function App() {
   const [getAllBooksByYearOption, setGetAllBooksByYearOption] = useState('');
   const [getAllBooksByYearOutput, setGetAllBooksByYearOutput] = useState('');
 
+  const resetModules = () => {
+    setGetAllBooks(false);
+    setGetAllBooksByTitle(false);
+    setGetAllBooksByAuthor(false);
+    setGetAllBooksByYear(false);
+  }
+
   return (
     <div className='bg-black min-h-screen'>
       <h1 className='text-white'>Project 1 Book API</h1>
 
-      <button className='text-white' onClick={() => setGetAllBooks(!getAllBooks)}>Get All Books</button>
+      {/* <button className='text-white' onClick={() => setGetAllBooks(!getAllBooks)}>Get All Books</button>
       <br />
       {
         getAllBooks && 
@@ -99,7 +106,17 @@ function App() {
             </button>
           <p className='text-white whitespace-pre-wrap'>{getAllBooksOutput}</p>
         </div>
-      }
+      } */}
+      <GetModule 
+      moduleState={getAllBooks} 
+      moduleStateHandler={setGetAllBooks} 
+      methodType={getAllBooksMethod} 
+      methodTypeHandler={setGetAllBooksMethod} 
+      outputResult={getAllBooksOutput} 
+      outputResultHandler={setGetAllBooksOutput} 
+      queryURL='/getBooks'
+      getAll={true}
+      resetModules={resetModules} />
 
       <GetModule 
       moduleState={getAllBooksByTitle} 
@@ -111,7 +128,9 @@ function App() {
       outputResult={getAllBooksByTitleOutput} 
       outputResultHandler={setGetAllBooksByTitleOutput} 
       queryType={'title'}
-      queryURL='/getBooksByTitle' />
+      queryURL='/getBooksByTitle'
+      getAll={false}
+      resetModules={resetModules} />
 
       <GetModule 
       moduleState={getAllBooksByAuthor} 
@@ -123,7 +142,9 @@ function App() {
       outputResult={getAllBooksByAuthorOutput} 
       outputResultHandler={setGetAllBooksByAuthorOutput} 
       queryType={'author'}
-      queryURL='/getBooksByAuthor' />
+      queryURL='/getBooksByAuthor'
+      getAll={false}
+      resetModules={resetModules} />
 
       <GetModule 
       moduleState={getAllBooksByYear} 
@@ -135,7 +156,9 @@ function App() {
       outputResult={getAllBooksByYearOutput} 
       outputResultHandler={setGetAllBooksByYearOutput} 
       queryType={'year'}
-      queryURL='/getBooksByYear' />
+      queryURL='/getBooksByYear'
+      getAll={false}
+      resetModules={resetModules} />
     </div>
   )
 }
