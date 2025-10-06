@@ -72,13 +72,13 @@ function GetModule(props: {
             {
               searchTermHandler &&
               <p className='text-white'>
+                <label>{queryType}: </label>
                 <input
-                  name='title'
-                  id='title'
+                  name='term'
+                  id='term'
                   value={searchTerm}
                   onChange={searchTermOnChange}
                 />
-                <label>{queryType}: </label>
               </p>
             }
           </fieldset>
