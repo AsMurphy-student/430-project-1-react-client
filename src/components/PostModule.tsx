@@ -1,16 +1,66 @@
 // import type { BookParams } from "../interfaces/BookParams";
 
 import { useState } from "react";
+import type { BookParams } from "../interfaces/BookParams";
 
-function PostModule(props: {
-    queryURL: string,
-  }) {
+function AddBookInput(props: { query: string, bookObj: BookParams }) {
+  const { query, bookObj } = props;
+  return (
+    <p className='text-white'>
+      <label>{query}: </label>
+      <input
+        name={`${query}-term`}
+        id='term'
+        value={bookObj.author}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
+          {
+            switch (query) {
+              case 'author':
+                bookObj.author = event.target.value
+                break;
+              case 'country':
+                bookObj.country = event.target.value
+                break;
+              case 'language':
+                bookObj.language = event.target.value
+                break;
+              case 'link':
+                bookObj.link = event.target.value
+                break;
+              case 'pages':
+                bookObj.pages = Number(event.target.value)
+                break;
+              case 'title':
+                bookObj.title = event.target.value
+                break;
+              case 'year':
+                bookObj.year = Number(event.target.value)
+                break;
+              // case 'genres':
+              //   bookObj.author = event.target.value
+              //   break;
+            }
+          }}
+      />
+    </p>
+  )
+}
 
-  const {
-    queryURL } = props;
+function PostModule(props: { queryURL: string, }) {
+  const { queryURL } = props;
 
-    const [moduleState, setModuleState] = useState(false);
-    const [outputResult, setOutputResult] = useState('');
+  const [moduleState, setModuleState] = useState(false);
+  const [outputResult, setOutputResult] = useState('');
+
+  const book: BookParams = {
+    author: "",
+    country: "",
+    language: "",
+    link: "",
+    pages: 0,
+    title: "",
+    year: 0,
+  }
   return (
     <>
       <button className='text-white' onClick={() => {
@@ -24,7 +74,15 @@ function PostModule(props: {
             {/* Put Input Fields Here */}
             {
               queryURL === "/addBook" &&
-              <p>add book here</p>
+              <>
+                <AddBookInput query={"author"} bookObj={book} />
+                <AddBookInput query={"country"} bookObj={book} />
+                <AddBookInput query={"language"} bookObj={book} />
+                <AddBookInput query={"link"} bookObj={book} />
+                <AddBookInput query={"pages"} bookObj={book} />
+                <AddBookInput query={"title"} bookObj={book} />
+                <AddBookInput query={"year"} bookObj={book} />
+              </>
             }
             {
               queryURL === "/addGenre" &&
