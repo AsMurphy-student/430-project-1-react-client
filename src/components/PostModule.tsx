@@ -91,7 +91,6 @@ function PostModule(props: { queryURL: string, }) {
         moduleState && 
         <div>
           <fieldset>
-            {/* Put Input Fields Here */}
             {
               queryURL === "/addBook" &&
               <>
@@ -179,39 +178,6 @@ function PostModule(props: { queryURL: string, }) {
               `Content-Length: ${response.headers.get('content-length')}\n` +
               `Response: [${JSON.stringify(obj)}]`;
             setOutputResult(output);
-            // console.log(newBook);
-            // const fetchURL = searchTerm && searchTermHandler 
-            // ? `${queryURL}?${queryType}=${searchTerm}`
-            // : `${queryURL}`;
-
-            // const response = await fetch(fetchURL, {
-            //   method: methodType,
-            //   headers: {
-            //     'Accept': 'application/json',
-            //   },
-            // });
-
-            // if (!response.ok) {
-            //   console.log('error');
-            // }
-            // else if (response.body) {
-            //   const jsonData = await response.json();
-
-            //   const output = '' +
-            //   `Status: ${response.status}\n` +
-            //   `Content-Length: ${response.headers.get('content-length')}\n` +
-            //   `Response: [${JSON.stringify(jsonData)}]`;
-
-            //   outputResultHandler(output);
-            // }
-            // else{
-            //   const output = `
-            //   Status: ${response.status}\n
-            //   Content-Length: ${response.headers.get('content-length')}
-            //   `;
-
-            //   outputResultHandler(output);
-            // }
             }}>
               Working?
             </button>
