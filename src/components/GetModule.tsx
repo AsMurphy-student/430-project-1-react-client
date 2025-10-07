@@ -92,7 +92,16 @@ function GetModule(props: { queryURL: string, }) {
             });
 
             if (!response.ok) {
-              console.log('error');
+              let output = 
+              `Status: ${response.status}\n` +
+              `Content-Length: ${response.headers.get('content-length')}`;
+
+              if (response.body) {
+                const jsonErrorData = await response.json();
+                output = output + `\nError: ${JSON.stringify(jsonErrorData)}`;
+              }
+
+              setOutputResult(output);
             }
             else if (response.body) {
               const jsonData = await response.json();
