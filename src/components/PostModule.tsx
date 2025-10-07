@@ -9,12 +9,12 @@ function PostModule(props: {
   const {
     queryURL } = props;
 
-    const [moduleState, moduleStateHandler] = useState(false);
-    const [outputResult, outputResultHandler] = useState('');
+    const [moduleState, setModuleState] = useState(false);
+    const [outputResult, setOutputResult] = useState('');
   return (
     <>
       <button className='text-white' onClick={() => {
-          moduleStateHandler(!moduleState)
+          setModuleState(!moduleState)
         }}>{queryURL === "/addBook" ? `Add Book` : 'Add Genre'}</button>
       <hr />
       {
@@ -25,7 +25,7 @@ function PostModule(props: {
           </fieldset>
           <button className='text-white' onClick={async () => {
             if (queryURL === '/addBook') {
-              outputResultHandler('');
+              setOutputResult('');
               // const bookToAdd : BookParams = {
               //   author: "",
               //   country: "",

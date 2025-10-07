@@ -10,25 +10,25 @@ function GetModule(props: {
 
   let searchTermOnChange;
 
-  const [moduleState, moduleStateHandler] = useState(false);
-  const [methodType, methodTypeHandler] = useState('GET');
-  const [searchTerm, searchTermHandler] = useState('');
-  const [outputResult, outputResultHandler] = useState('');
+  const [moduleState, setModuleState] = useState(false);
+  const [methodType, setMethodType] = useState('GET');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [outputResult, setOutputResult] = useState('');
 
   if (!getAll) {
     searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      searchTermHandler(event.target.value);
+      setSearchTerm(event.target.value);
     }
   }
 
   const methodTypeOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    methodTypeHandler(event.target.value);
+    setMethodType(event.target.value);
   };
 
   return (
     <>
       <button className='text-white' onClick={() => {
-          moduleStateHandler(!moduleState)
+          setModuleState(!moduleState)
         }}>{queryType ? `Get All Books By ${queryType}` : 'Get All Books'}</button>
       <hr />
       {
@@ -94,14 +94,14 @@ function GetModule(props: {
               `Content-Length: ${response.headers.get('content-length')}\n` +
               `Response: [${JSON.stringify(jsonData)}]`;
 
-              outputResultHandler(output);
+              setOutputResult(output);
             }
             else{
               const output = 
               `Status: ${response.status}\n` +
               `Content-Length: ${response.headers.get('content-length')}`;
 
-              outputResultHandler(output);
+              setOutputResult(output);
             }
             }}>
               Working?
