@@ -23,71 +23,39 @@ function AddBookInput(props: { query: string, bookObj: BookParams, setBookObj: R
       case 'year':
         return bookObj.year;
       case 'genres':
-        return bookObj.genres?.join(',');
+        if (bookObj.genres)
+          return bookObj.genres?.join(',');
+        else
+          return '';
     }
   }
   return (
     <p className='text-white'>
-      <label>{query === 'genre' ? 'Genre (use , as separator)' : query}: </label>
+      <label>{query === 'genres' ? 'Genre (use , as separator)' : query}: </label>
       <input
         name={`${query}-term`}
         id='term'
         value={renderValue(query)}
-        // inputMode={query === 'pages' || query === 'year' ? 'numeric' : 'search'}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
           {
-            switch (query) {
-              case 'author':
+            if (query === 'pages' || query === 'year') {
+              if (!Number.isNaN(Number(event.target.value))) {
                 setBookObj({
                   ...bookObj,
-                  author: event.target.value,
+                  [query]: Number(event.target.value),
                 });
-                break;
-              case 'country':
-                setBookObj({
-                  ...bookObj,
-                  country: event.target.value,
-                });
-                break;
-              case 'language':
-                setBookObj({
-                  ...bookObj,
-                  language: event.target.value,
-                });
-                break;
-              case 'link':
-                setBookObj({
-                  ...bookObj,
-                  link: event.target.value,
-                });
-                break;
-              case 'pages':
-                if (!Number.isNaN(Number(event.target.value)))
-                  setBookObj({
-                    ...bookObj,
-                    pages: Number(event.target.value),
-                  });
-                  break;
-              case 'title':
-                setBookObj({
-                  ...bookObj,
-                  title: event.target.value,
-                });
-                break;
-              case 'year':
-                if (!Number.isNaN(Number(event.target.value)))
-                  setBookObj({
-                    ...bookObj,
-                    year: Number(event.target.value),
-                  });
-                  break;
-              case 'genres':
-                setBookObj({
-                  ...bookObj,
-                  genres: event.target.value.split(','),
-                });
-                break;
+              }
             }
+            else if (query === 'genres')
+              setBookObj({
+                ...bookObj,
+                [query]: event.target.value.split(','),
+              });
+            else
+              setBookObj({
+                ...bookObj,
+                [query]: event.target.value,
+              });
           }}
       />
     </p>
@@ -134,7 +102,7 @@ function PostModule(props: { queryURL: string, }) {
                 <AddBookInput query={"pages"} bookObj={newBook} setBookObj={setNewBook} />
                 <AddBookInput query={"title"} bookObj={newBook} setBookObj={setNewBook} />
                 <AddBookInput query={"year"} bookObj={newBook} setBookObj={setNewBook} />
-                <AddBookInput query={"genre"} bookObj={newBook} setBookObj={setNewBook} />
+                <AddBookInput query={"genres"} bookObj={newBook} setBookObj={setNewBook} />
               </>
             }
             {
@@ -170,6 +138,7 @@ function PostModule(props: { queryURL: string, }) {
             else {
 
             }
+            console.log(newBook);
             // const fetchURL = searchTerm && searchTermHandler 
             // ? `${queryURL}?${queryType}=${searchTerm}`
             // : `${queryURL}`;
