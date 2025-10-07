@@ -1,4 +1,4 @@
-import type { BookParams } from "../interfaces/BookParams";
+// import type { BookParams } from "../interfaces/BookParams";
 
 function PostModule(props: { 
     moduleState: boolean, 
@@ -11,7 +11,7 @@ function PostModule(props: {
 
   const { 
     moduleState, moduleStateHandler,
-    outputResult, outputResultHandler, 
+    outputResult, //outputResultHandler, 
     queryURL, resetModules } = props;
 
   return (
@@ -31,15 +31,15 @@ function PostModule(props: {
           </fieldset>
           <button className='text-white' onClick={async () => {
             if (queryURL === '/addBook') {
-              const bookToAdd : BookParams = {
-                author: "",
-                country: "",
-                language: "",
-                link: "",
-                pages: 0,
-                title: "",
-                year: 0
-              }
+              // const bookToAdd : BookParams = {
+              //   author: "",
+              //   country: "",
+              //   language: "",
+              //   link: "",
+              //   pages: 0,
+              //   title: "",
+              //   year: 0
+              // }
             }
             else {
 

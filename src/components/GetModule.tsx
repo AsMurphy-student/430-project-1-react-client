@@ -1,29 +1,21 @@
+import { useState } from "react";
+
 function GetModule(props: { 
-    moduleState: boolean, 
-    moduleStateHandler: React.Dispatch<React.SetStateAction<boolean>>,
-    methodType: string,
-    methodTypeHandler: React.Dispatch<React.SetStateAction<string>>,
-    searchTerm?: string,
-    searchTermHandler?: React.Dispatch<React.SetStateAction<string>>,
-    outputResult: string,
-    outputResultHandler: React.Dispatch<React.SetStateAction<string>>,
     queryType?: string,
     queryURL: string,
     getAll: boolean,
-    resetModules: () => void,
   }) {
 
-  const { 
-    moduleState, moduleStateHandler, 
-    methodType, methodTypeHandler, 
-    searchTerm, searchTermHandler, 
-    outputResult, outputResultHandler, 
-    queryType, queryURL, 
-    getAll, resetModules } = props;
+  const { queryType, queryURL, getAll, } = props;
 
   let searchTermOnChange;
 
-  if (!getAll && searchTermHandler) {
+  const [moduleState, moduleStateHandler] = useState(false);
+  const [methodType, methodTypeHandler] = useState('GET');
+  const [searchTerm, searchTermHandler] = useState('');
+  const [outputResult, outputResultHandler] = useState('');
+
+  if (!getAll) {
     searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       searchTermHandler(event.target.value);
     }
@@ -36,9 +28,6 @@ function GetModule(props: {
   return (
     <>
       <button className='text-white' onClick={() => {
-          if (!moduleState) {
-            resetModules();
-          }
           moduleStateHandler(!moduleState)
         }}>{queryType ? `Get All Books By ${queryType}` : 'Get All Books'}</button>
       <hr />
@@ -49,7 +38,7 @@ function GetModule(props: {
             <p className='text-white'>
               <input
                 type="radio"
-                name='method'
+                name={`${queryURL}-method`}
                 value="GET"
                 id='get'
                 checked={methodType === 'GET'}
@@ -61,7 +50,7 @@ function GetModule(props: {
             <p className='text-white'>
               <input
                 type="radio"
-                name='method'
+                name={`${queryURL}-method`}
                 value="HEAD"
                 id='head'
                 checked={methodType === 'HEAD'}
@@ -70,11 +59,11 @@ function GetModule(props: {
               <label>HEAD</label>
             </p>
             {
-              searchTermHandler &&
+              !getAll &&
               <p className='text-white'>
                 <label>{queryType}: </label>
                 <input
-                  name='term'
+                  name={`${queryURL}-term`}
                   id='term'
                   value={searchTerm}
                   onChange={searchTermOnChange}
@@ -83,7 +72,7 @@ function GetModule(props: {
             }
           </fieldset>
           <button className='text-white' onClick={async () => {
-            const fetchURL = searchTerm && searchTermHandler 
+            const fetchURL = !getAll 
             ? `${queryURL}?${queryType}=${searchTerm}`
             : `${queryURL}`;
 
