@@ -31,7 +31,7 @@ function AddBookInput(props: { query: string, bookObj: BookParams, setBookObj: R
   }
   return (
     <p className='text-white'>
-      <label>{query === 'genres' ? 'Genre (use , as separator)' : query}: </label>
+      <label>{query === 'genres' ? 'Genre (optional; use comma as separator)' : query}: </label>
       <input
         name={`${query}-term`}
         id='term'
@@ -132,13 +132,54 @@ function PostModule(props: { queryURL: string, }) {
             }
           </fieldset>
           <button className='text-white' onClick={async () => {
+            let formData = '';
+
+            if ((newBook.author === '' ||
+              newBook.country === '' ||
+              newBook.language === '' ||
+              newBook.link === '' ||
+              newBook.title === '') &&
+              queryURL !== '/addGenre') {
+                setOutputResult('Error: Not all fields (genres excluded) are filled.');
+                return 1;
+            }
             if (queryURL === '/addBook') {
-              
+              formData = 
+              `author=${newBook.author}` +
+              `&country=${newBook.country}` +
+              `&language=${newBook.language}` +
+              `&link=${newBook.link}` +
+              `&pages=${newBook.pages}` +
+              `&title=${newBook.title}` +
+              `&year=${newBook.year}`;
+              if (newBook.genres) 
+                formData = formData + `&genres=${newBook.genres.join(',')}`;
+            }
+            else if (queryURL === '/addGenre') {
+              formData =
+              `title=${title}` +
+              `&genre=${genre}`;
             }
             else {
-
+              return 1;
             }
-            console.log(newBook);
+
+            const response = await fetch(queryURL, {
+              method: 'post',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+              },
+              body: formData,
+            });
+
+            const obj = await response.json();
+            const output = 
+              `Status: ${response.status}\n` +
+              `Content-Length: ${response.headers.get('content-length')}\n` +
+              `Response: [${JSON.stringify(obj)}]`;
+            setOutputResult(output);
+            // console.log(newBook);
             // const fetchURL = searchTerm && searchTermHandler 
             // ? `${queryURL}?${queryType}=${searchTerm}`
             // : `${queryURL}`;
