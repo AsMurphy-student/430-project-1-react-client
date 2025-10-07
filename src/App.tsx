@@ -1,6 +1,7 @@
 // import { useState } from 'react';
 import './App.css'
 import GetModule from './components/GetModule';
+import PostModule from './components/PostModule';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       <GetModule queryURL='/getBooksByTitle' />
       <GetModule queryURL='/getBooksByAuthor' />
       <GetModule queryURL='/getBooksByYear' />
+
+      <PostModule queryURL={'/addBook'} />
+      <PostModule queryURL={'/addGenre'} />
     </div>
   )
 }

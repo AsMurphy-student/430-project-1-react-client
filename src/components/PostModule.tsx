@@ -22,6 +22,14 @@ function PostModule(props: {
         <div>
           <fieldset>
             {/* Put Input Fields Here */}
+            {
+              queryURL === "/addBook" &&
+              <p>add book here</p>
+            }
+            {
+              queryURL === "/addGenre" &&
+              <p>add genre here</p>
+            }
           </fieldset>
           <button className='text-white' onClick={async () => {
             if (queryURL === '/addBook') {
