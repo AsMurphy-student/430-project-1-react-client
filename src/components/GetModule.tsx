@@ -1,12 +1,14 @@
 import { useState } from "react";
 
-function GetModule(props: { 
-    queryType?: string,
-    queryURL: string,
-    getAll: boolean,
-  }) {
+interface Endpoints {
+  [key: string]: string;
+  '/getBooksByTitle': string;
+  '/getBooksByAuthor': string;
+  '/getBooksByYear': string;
+}
 
-  const { queryType, queryURL, getAll, } = props;
+function GetModule(props: { queryURL: string, }) {
+  const { queryURL, } = props;
 
   let searchTermOnChange;
 
@@ -15,7 +17,13 @@ function GetModule(props: {
   const [searchTerm, setSearchTerm] = useState('');
   const [outputResult, setOutputResult] = useState('');
 
-  if (!getAll) {
+  const typeStruct: Endpoints = {
+    '/getBooksByTitle': 'title',
+    '/getBooksByAuthor': 'author',
+    '/getBooksByYear': 'year',
+  }
+
+  if (queryURL !== '/getBooks') {
     searchTermOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(event.target.value);
     }
@@ -29,7 +37,7 @@ function GetModule(props: {
     <>
       <button className='text-white' onClick={() => {
           setModuleState(!moduleState)
-        }}>{queryType ? `Get All Books By ${queryType}` : 'Get All Books'}</button>
+        }}>{typeStruct[queryURL] ? `Get All Books By ${typeStruct[queryURL]}` : 'Get All Books'}</button>
       <hr />
       {
         moduleState && 
@@ -59,9 +67,9 @@ function GetModule(props: {
               <label>HEAD</label>
             </p>
             {
-              !getAll &&
+              queryURL !== '/getBooks' && typeStruct[queryURL] &&
               <p className='text-white'>
-                <label>{queryType}: </label>
+                <label>{typeStruct[queryURL]}: </label>
                 <input
                   name={`${queryURL}-term`}
                   id='term'
@@ -72,8 +80,8 @@ function GetModule(props: {
             }
           </fieldset>
           <button className='text-white' onClick={async () => {
-            const fetchURL = !getAll 
-            ? `${queryURL}?${queryType}=${searchTerm}`
+            const fetchURL = typeStruct[queryURL] 
+            ? `${queryURL}?${typeStruct[queryURL]}=${searchTerm}`
             : `${queryURL}`;
 
             const response = await fetch(fetchURL, {
