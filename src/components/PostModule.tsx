@@ -1,25 +1,19 @@
 // import type { BookParams } from "../interfaces/BookParams";
 
-function PostModule(props: { 
-    moduleState: boolean, 
-    moduleStateHandler: React.Dispatch<React.SetStateAction<boolean>>,
-    outputResult: string,
-    outputResultHandler: React.Dispatch<React.SetStateAction<string>>,
+import { useState } from "react";
+
+function PostModule(props: {
     queryURL: string,
-    resetModules: () => void,
   }) {
 
-  const { 
-    moduleState, moduleStateHandler,
-    outputResult, //outputResultHandler, 
-    queryURL, resetModules } = props;
+  const {
+    queryURL } = props;
 
+    const [moduleState, moduleStateHandler] = useState(false);
+    const [outputResult, outputResultHandler] = useState('');
   return (
     <>
       <button className='text-white' onClick={() => {
-          if (!moduleState) {
-            resetModules();
-          }
           moduleStateHandler(!moduleState)
         }}>{queryURL === "/addBook" ? `Add Book` : 'Add Genre'}</button>
       <hr />
@@ -31,6 +25,7 @@ function PostModule(props: {
           </fieldset>
           <button className='text-white' onClick={async () => {
             if (queryURL === '/addBook') {
+              outputResultHandler('');
               // const bookToAdd : BookParams = {
               //   author: "",
               //   country: "",
