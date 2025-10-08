@@ -16,7 +16,8 @@ function GetAllBooksByTitle(props: { markColor: string}) {
       active:border-stone-400 
       rounded-lg 
       p-1
-      mb-4' onClick={async () => {
+      mb-4' 
+      onClick={async () => {
         setModuleState(!moduleState);
       }}>
         Get All Books By title
