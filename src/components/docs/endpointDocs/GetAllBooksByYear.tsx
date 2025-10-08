@@ -22,7 +22,7 @@ function GetAllBooksByYear(props: { markColor: string}) {
       </button>
       {
         moduleState &&
-        <>
+        <div>
           <h2>Query Params</h2>
           <p><mark className={markColor}>year</mark> - The year of the book's release.</p>
           <br />
@@ -45,7 +45,7 @@ function GetAllBooksByYear(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
     </>
   );

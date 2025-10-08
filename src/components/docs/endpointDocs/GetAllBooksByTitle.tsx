@@ -23,11 +23,18 @@ function GetAllBooksByTitle(props: { markColor: string}) {
       </button>
       {
         moduleState &&
-        <>
-          <h2>Query Params</h2>
+        <div className='
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
+          <h2 className="text-2xl mb-2">Query Params</h2>
           <p><mark className={markColor}>title</mark> - The name of the book.</p>
           <br />
-          <h2>Returns</h2>
+          <h2 className="text-2xl mb-2">Returns</h2>
           <p>A JSON Array of book object.</p>
           <p>Format: <mark className={markColor}>
               {"[{ author: string, country: string, language: string, "}
@@ -36,8 +43,14 @@ function GetAllBooksByTitle(props: { markColor: string}) {
             </mark>
           </p>
           <br />
-          <h2>Examples</h2>
-          <div>
+          <h2 className="text-2xl mb-2">Examples</h2>
+          <div className='
+            bg-gray-600 
+            border-4 
+            border-stone-200
+            rounded-lg 
+            p-4'
+          >
             <p>Request: <mark className={markColor}>/getAllBooksByTitle?title=title1</mark></p>
             <p>Result: <mark className={markColor}>
                 {"[{ author: 'Author1', country: 'Country1', language: 'English', "}
@@ -46,7 +59,7 @@ function GetAllBooksByTitle(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
     </>
   );

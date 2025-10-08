@@ -23,12 +23,13 @@ function GetAllBooks(props: { markColor: string}) {
       {
         moduleState &&
         <div className='
-      bg-gray-700 
-      border-4 
-      border-stone-200
-      rounded-lg 
-      p-4
-      mb-4'>
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
           <h2 className="text-2xl mb-2">Query Params</h2>
           <p>No Supported Query Params</p>
           <br />

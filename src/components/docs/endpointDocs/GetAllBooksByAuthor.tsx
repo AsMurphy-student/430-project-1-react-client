@@ -22,7 +22,7 @@ function GetAllBooksByAuthor(props: { markColor: string}) {
       </button>
       {
         moduleState &&
-        <>
+        <div>
           <h2>Query Params</h2>
           <p><mark className={markColor}>author</mark> - The author of the book.</p>
           <br />
@@ -45,7 +45,7 @@ function GetAllBooksByAuthor(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
     </>
   );
