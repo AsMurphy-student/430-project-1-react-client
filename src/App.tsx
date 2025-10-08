@@ -8,8 +8,18 @@ function App() {
   const [showDocs, setShowDocs] = useState(false);
 
   return (
-    <div className='bg-black min-h-screen text-white'>
-      <button className='text-white' onClick={async () => {
+    <div className='bg-slate-900 min-h-screen text-white font-[MartianMono] p-5'>
+      <button className='
+      bg-gray-700 
+      hover:bg-gray-600 
+      active:bg-gray-500 
+      border-4 
+      border-stone-200 
+      active:border-stone-400 
+      rounded-lg 
+      p-1
+      mb-4' 
+      onClick={async () => {
         setShowDocs(!showDocs);
       }}>
           {showDocs ? "Return to App" : "Show Docs"}
@@ -18,7 +28,7 @@ function App() {
       {
         showDocs ? 
         <>
-          <h1 className='text-white'>Project 1 Book API Documentation</h1>
+          <h1 className='text-3xl mb-4'>Project 1 Book API Documentation</h1>
           <ModuleDocs queryURL='/getBooks' />
           <ModuleDocs queryURL='/getBooksByTitle' />
           <ModuleDocs queryURL='/getBooksByAuthor' />
@@ -29,7 +39,7 @@ function App() {
         </>
         :
         <>
-          <h1 className='text-white'>Project 1 Book API</h1>
+          <h1 className='text-3xl'>Project 1 Book API</h1>
 
           <GetModule queryURL='/getBooks' />
           <GetModule queryURL='/getBooksByTitle' />

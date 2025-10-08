@@ -10,7 +10,7 @@ function GetAllBooksByTitle(props: { markColor: string}) {
       <button className='text-white' onClick={async () => {
         setModuleState(!moduleState);
       }}>
-        Get All Books By Title
+        Get All Books By title
       </button>
       {
         moduleState &&

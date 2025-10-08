@@ -9,7 +9,7 @@ function GetAllBooksByAuthor(props: { markColor: string}) {
       <button className='text-white' onClick={async () => {
         setModuleState(!moduleState);
       }}>
-        Get All Books By Author
+        Get All Books By author
       </button>
       {
         moduleState &&

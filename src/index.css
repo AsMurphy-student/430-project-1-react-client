@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'MartianMono';
+  src: url("./assets/fonts/MartianMono-Regular.ttf") format('truetype');
+}
