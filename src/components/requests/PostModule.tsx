@@ -1,7 +1,7 @@
 // import type { BookParams } from "../interfaces/BookParams";
 
 import { useState } from "react";
-import type { BookParams } from "../interfaces/BookParams";
+import type { BookParams } from "../../interfaces/BookParams";
 
 function AddBookInput(props: { query: string, bookObj: BookParams, setBookObj: React.Dispatch<React.SetStateAction<BookParams>> }) {
   const { query, bookObj, setBookObj } = props;

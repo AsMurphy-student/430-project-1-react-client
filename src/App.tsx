@@ -1,8 +1,9 @@
 // import { useState } from 'react';
 import { useState } from 'react';
 import './App.css'
-import GetModule from './components/GetModule';
-import PostModule from './components/PostModule';
+import GetModule from './components/requests/GetModule';
+import PostModule from './components/requests/PostModule';
+import ModuleDocs from './components/docs/ModuleDocs';
 
 function App() {
   const [showDocs, setShowDocs] = useState(false);
@@ -19,6 +20,13 @@ function App() {
         showDocs ? 
         <>
           <h1 className='text-white'>Project 1 Book API Documentation</h1>
+          <ModuleDocs queryURL='/getBooks' />
+          <ModuleDocs queryURL='/getBooksByTitle' />
+          <ModuleDocs queryURL='/getBooksByAuthor' />
+          <ModuleDocs queryURL='/getBooksByYear' />
+
+          <ModuleDocs queryURL='/addBook' />
+          <ModuleDocs queryURL='/addGenre' />
         </>
         :
         <>
@@ -29,8 +37,8 @@ function App() {
           <GetModule queryURL='/getBooksByAuthor' />
           <GetModule queryURL='/getBooksByYear' />
 
-          <PostModule queryURL={'/addBook'} />
-          <PostModule queryURL={'/addGenre'} />
+          <PostModule queryURL='/addBook' />
+          <PostModule queryURL='/addGenre' />
         </>
       }
 
