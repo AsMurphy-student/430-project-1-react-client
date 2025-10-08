@@ -4,10 +4,11 @@ function ParamInfo(props: { name: string, type: string, markColor: string }) {
   const { name, type, markColor } = props;
 
   return (
-    <p>
-      <mark className={markColor}>{name}</mark>
-      {" Type: "}<mark className={markColor}>{type}</mark> - The {name.replace('?', '')} of the book.
-    </p>
+    <div className="flex gap-2">
+      <p><mark className={markColor}>{name}</mark></p>
+      <p>{" Type: "}<mark className={markColor}>{type}</mark></p>
+      <p> - The {name.replace('?', '')} of the book.</p>
+    </div>
   );
 }
 
@@ -34,12 +35,19 @@ function AddBook(props: { markColor: string}) {
       </button>
       {
         moduleState &&
-        <>
-          <h2>Supported Body Formats</h2>
+        <div className='
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
+          <h2 className="text-2xl mb-2">Supported Body Formats</h2>
           <p><mark className={markColor}>application/json</mark>
           {" "}<mark className={markColor}>application/x-www-form-urlencoded</mark></p>
           <br />
-          <h2>Body Parameters</h2>
+          <h2 className="text-2xl mb-2">Body Parameters</h2>
           <ParamInfo name={"author"} type={"string"} markColor={markColor} />
           <ParamInfo name={"country"} type={"string"} markColor={markColor} />
           <ParamInfo name={"language"} type={"string"} markColor={markColor} />
@@ -49,7 +57,7 @@ function AddBook(props: { markColor: string}) {
           <ParamInfo name={"year"} type={"number"} markColor={markColor} />
           <ParamInfo name={"genres?"} type={"string[]"} markColor={markColor} />
           <br />
-          <h2>Returns</h2>
+          <h2 className="text-2xl mb-2">Returns</h2>
           <p>A JSON book object representing a new or updated book.</p>
           <p>Format: <mark className={markColor}>
               {"[{ author: string, country: string, language: string, "}
@@ -58,8 +66,15 @@ function AddBook(props: { markColor: string}) {
             </mark>
           </p>
           <br />
-          <h2>Examples</h2>
-          <div>
+          <h2 className="text-2xl mb-2">Examples</h2>
+          <div className='
+          bg-gray-600 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+          >
             <p>Request: <mark className={markColor}>/addBook</mark></p>
             <p>Body: <mark className={markColor}>
                 {"{ author: 'Author1', country: 'Country1', language: 'English', "}
@@ -71,7 +86,14 @@ function AddBook(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-          <div>
+          <div className='
+          bg-gray-600 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+          >
             <p>Request: <mark className={markColor}>/addBook</mark></p>
             <p>Body: <mark className={markColor}>
                 {"{ author: 'Author1', country: 'Country1', language: 'English', "}
@@ -85,7 +107,14 @@ function AddBook(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-          <div>
+          <div className='
+          bg-gray-600 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+          >
             <p>Request: <mark className={markColor}>/addBook</mark></p>
             <p>Body: <mark className={markColor}>
                 {"{ author: 'Author1', country: 'Country1', language: 'English' }"}
@@ -95,7 +124,7 @@ function AddBook(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
     </>
   );

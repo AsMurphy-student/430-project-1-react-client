@@ -23,12 +23,19 @@ function AddGenre(props: { markColor: string}) {
       </button>
       {
         moduleState &&
-        <>
-          <h2>Supported Body Formats</h2>
+        <div className='
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
+          <h2 className="text-2xl mb-2">Supported Body Formats</h2>
           <p><mark className={markColor}>application/json</mark>
           {" "}<mark className={markColor}>application/x-www-form-urlencoded</mark></p>
           <br />
-          <h2>Body Parameters</h2>
+          <h2 className="text-2xl mb-2">Body Parameters</h2>
           <p>
             <mark className={markColor}>title</mark>
             {" Type: "}<mark className={markColor}>string</mark> - The title of the book.
@@ -38,15 +45,22 @@ function AddGenre(props: { markColor: string}) {
             {" Type: "}<mark className={markColor}>string</mark> - The one genre to add.
           </p>
           <br />
-          <h2>Returns</h2>
+          <h2 className="text-2xl mb-2">Returns</h2>
           <p>A JSON book object with the title of the book and new genre to add.</p>
           <p>Format: <mark className={markColor}>
               {"[{ title: string, genre: string }"}
             </mark>
           </p>
           <br />
-          <h2>Examples</h2>
-          <div>
+          <h2 className="text-2xl mb-2">Examples</h2>
+          <div className='
+          bg-gray-600 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+          >
             <p>Request: <mark className={markColor}>/addGenre</mark></p>
             <p>Body: <mark className={markColor}>
                 {"[{ title: title1, genre: 'genre2' }"}
@@ -58,7 +72,14 @@ function AddGenre(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-          <div>
+          <div className='
+          bg-gray-600 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+          >
             <p>Request: <mark className={markColor}>/addBook</mark></p>
             <p>Body: <mark className={markColor}>
                 {"{ title: 'title1' }"}
@@ -68,7 +89,7 @@ function AddGenre(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
     </>
   );
