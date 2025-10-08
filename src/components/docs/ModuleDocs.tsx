@@ -7,7 +7,7 @@ import GetAllBooksByYear from "./endpointDocs/GetAllBooksByYear";
 
 function ModuleDocs(props: {queryURL: string}) {
   const { queryURL } = props;
-  const markColor = 'bg-sky-400';
+  const markColor = 'bg-amber-400';
 
   const RenderDocComponent = () => {
     switch (queryURL) {
@@ -33,9 +33,9 @@ function ModuleDocs(props: {queryURL: string}) {
   }
 
   return (
-    <>
+    <div>
       {RenderDocComponent()}
-    </>
+    </div>
   )
 }
 

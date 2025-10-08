@@ -6,18 +6,33 @@ function GetAllBooks(props: { markColor: string}) {
   const [moduleState, setModuleState] = useState(false);
   return (
     <>
-      <button className='text-white' onClick={async () => {
+      <button className='
+      bg-gray-700 
+      hover:bg-gray-600 
+      active:bg-gray-500 
+      border-4 
+      border-stone-200 
+      active:border-stone-400 
+      rounded-lg 
+      p-1
+      mb-4' onClick={async () => {
         setModuleState(!moduleState);
       }}>
         Get All Books
       </button>
       {
         moduleState &&
-        <>
-          <h2>Query Params</h2>
+        <div className='
+      bg-gray-700 
+      border-4 
+      border-stone-200
+      rounded-lg 
+      p-4
+      mb-4'>
+          <h2 className="text-2xl mb-2">Query Params</h2>
           <p>No Supported Query Params</p>
           <br />
-          <h2>Returns</h2>
+          <h2 className="text-2xl mb-2">Returns</h2>
           <p>A JSON Array of book object.</p>
           <p>Format: <mark className={markColor}>
               {"[{ author: string, country: string, language: string, "}
@@ -26,8 +41,14 @@ function GetAllBooks(props: { markColor: string}) {
             </mark>
           </p>
           <br />
-          <h2>Examples</h2>
-          <div>
+          <h2 className="text-2xl mb-2">Examples</h2>
+          <div className='
+            bg-gray-600 
+            border-4 
+            border-stone-200
+            rounded-lg 
+            p-4'
+          >
             <p>Request: <mark className={markColor}>/getAllBooks</mark></p>
             <p>Result: <mark className={markColor}>
                 {"[{ author: 'Author1', country: 'Country1', language: 'English', "}
@@ -36,9 +57,8 @@ function GetAllBooks(props: { markColor: string}) {
               </mark>
             </p>
           </div>
-        </>
+        </div>
       }
-      <hr />
     </>
   );
 }

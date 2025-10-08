@@ -7,7 +7,16 @@ function GetAllBooksByTitle(props: { markColor: string}) {
   
   return (
     <>
-      <button className='text-white' onClick={async () => {
+      <button className='
+      bg-gray-700 
+      hover:bg-gray-600 
+      active:bg-gray-500 
+      border-4 
+      border-stone-200 
+      active:border-stone-400 
+      rounded-lg 
+      p-1
+      mb-4' onClick={async () => {
         setModuleState(!moduleState);
       }}>
         Get All Books By title
@@ -39,7 +48,6 @@ function GetAllBooksByTitle(props: { markColor: string}) {
           </div>
         </>
       }
-      <hr />
     </>
   );
 }
