@@ -38,7 +38,6 @@ function GetModule(props: { queryURL: string, }) {
       <button className='text-white' onClick={() => {
           setModuleState(!moduleState)
         }}>{typeStruct[queryURL] ? `Get All Books By ${typeStruct[queryURL]}` : 'Get All Books'}</button>
-      <hr />
       {
         moduleState && 
         <div>
@@ -126,6 +125,7 @@ function GetModule(props: { queryURL: string, }) {
           <p className='text-white whitespace-pre-wrap'>{outputResult}</p>
         </div>
       }
+      <hr />
     </>
   );
 }
