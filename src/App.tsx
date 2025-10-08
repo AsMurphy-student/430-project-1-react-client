@@ -1,6 +1,5 @@
 // import { useState } from 'react';
 import { useState } from 'react';
-import './App.css'
 import GetModule from './components/requests/GetModule';
 import PostModule from './components/requests/PostModule';
 import ModuleDocs from './components/docs/ModuleDocs';
@@ -41,8 +40,6 @@ function App() {
           <PostModule queryURL='/addGenre' />
         </>
       }
-
-      
     </div>
   )
 }
