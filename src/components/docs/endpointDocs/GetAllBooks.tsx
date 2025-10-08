@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-function GetAllBooks() {
+function GetAllBooks(props: { markColor: string}) {
+  const { markColor } = props;
+
   const [moduleState, setModuleState] = useState(false);
   return (
     <>
@@ -17,7 +19,7 @@ function GetAllBooks() {
           <br />
           <h2>Returns</h2>
           <p>A JSON Array of book object.</p>
-          <p>Format: <mark className="bg-sky-400">
+          <p>Format: <mark className={markColor}>
               {"[{ author: string, country: string, language: string, "}
               {"link: string, pages: number, title: string, year: number, "}
               {"genres?: string[] }]"}
@@ -26,8 +28,8 @@ function GetAllBooks() {
           <br />
           <h2>Examples</h2>
           <div>
-            <p>Request: <mark className="bg-sky-400">/getAllBooks</mark></p>
-            <p>Result: <mark className="bg-sky-400">
+            <p>Request: <mark className={markColor}>/getAllBooks</mark></p>
+            <p>Result: <mark className={markColor}>
                 {"[{ author: 'Author1', country: 'Country1', language: 'English', "}
                 {"link: 'link.com', pages: 200, title: 'title1', year: 2025, "}
                 {"genres?: ['genre1'] }]"}

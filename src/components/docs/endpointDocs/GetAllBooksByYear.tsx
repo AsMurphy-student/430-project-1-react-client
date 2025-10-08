@@ -1,18 +1,41 @@
 import { useState } from "react";
 
-function GetAllBooksByYear() {
+function GetAllBooksByYear(props: { markColor: string}) {
+  const { markColor } = props;
+
   const [moduleState, setModuleState] = useState(false);
   return (
     <>
       <button className='text-white' onClick={async () => {
         setModuleState(!moduleState);
       }}>
-        Get All Books
+        Get All Books Year
       </button>
       {
         moduleState &&
         <>
-          <p>hello</p>
+          <h2>Query Params</h2>
+          <p><mark className={markColor}>year</mark> - The year of the book's release.</p>
+          <br />
+          <h2>Returns</h2>
+          <p>A JSON Array of book object.</p>
+          <p>Format: <mark className={markColor}>
+              {"[{ author: string, country: string, language: string, "}
+              {"link: string, pages: number, title: string, year: number, "}
+              {"genres?: string[] }]"}
+            </mark>
+          </p>
+          <br />
+          <h2>Examples</h2>
+          <div>
+            <p>Request: <mark className={markColor}>/getAllBooksByYear?year=2025</mark></p>
+            <p>Result: <mark className={markColor}>
+                {"[{ author: 'Author1', country: 'Country1', language: 'English', "}
+                {"link: 'link.com', pages: 200, title: 'title1', year: 2025, "}
+                {"genres?: ['genre1'] }]"}
+              </mark>
+            </p>
+          </div>
         </>
       }
       <hr />

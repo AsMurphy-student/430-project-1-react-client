@@ -7,26 +7,27 @@ import GetAllBooksByYear from "./endpointDocs/GetAllBooksByYear";
 
 function ModuleDocs(props: {queryURL: string}) {
   const { queryURL } = props;
+  const markColor = 'bg-sky-400';
 
   const RenderDocComponent = () => {
     switch (queryURL) {
       case '/getBooks':
-        return <GetAllBooks />
+        return <GetAllBooks markColor={markColor} />
         break;
       case '/getBooksByTitle':
-        return <GetAllBooksByTitle />
+        return <GetAllBooksByTitle markColor={markColor} />
         break;
       case '/getBooksByAuthor':
-        return <GetAllBooksByAuthor />
+        return <GetAllBooksByAuthor markColor={markColor} />
         break;
       case '/getBooksByYear':
-        return <GetAllBooksByYear />
+        return <GetAllBooksByYear markColor={markColor} />
         break;
       case '/addBook':
-        return <AddBook />
+        return <AddBook markColor={markColor} />
         break;
       case '/addGenre':
-        return <AddGenre />
+        return <AddGenre markColor={markColor} />
         break;
     }
   }

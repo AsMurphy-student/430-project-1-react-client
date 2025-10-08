@@ -1,13 +1,15 @@
 import { useState } from "react";
 
-function AddGenre() {
+function AddGenre(props: { markColor: string}) {
+  const { markColor } = props;
+
   const [moduleState, setModuleState] = useState(false);
   return (
     <>
       <button className='text-white' onClick={async () => {
         setModuleState(!moduleState);
       }}>
-        Add Book
+        Add Genre
       </button>
       {
         moduleState &&
