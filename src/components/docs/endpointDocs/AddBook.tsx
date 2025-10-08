@@ -53,6 +53,18 @@ function AddBook(props: { markColor: string}) {
             <p>Request: <mark className={markColor}>/addBook</mark></p>
             <p>Body: <mark className={markColor}>
                 {"{ author: 'Author1', country: 'Country1', language: 'English', "}
+                {"link: 'link.com', pages: 200, title: 'title1', year: 2025 }"}
+              </mark></p>
+            <p>Result: <mark className={markColor}>
+                {"{ author: 'Author1', country: 'Country1', language: 'English', "}
+                {"link: 'link.com', pages: 200, title: 'title1', year: 2025 }"}
+              </mark>
+            </p>
+          </div>
+          <div>
+            <p>Request: <mark className={markColor}>/addBook</mark></p>
+            <p>Body: <mark className={markColor}>
+                {"{ author: 'Author1', country: 'Country1', language: 'English', "}
                 {"link: 'link.com', pages: 200, title: 'title1', year: 2025, "}
                 {"genres?: ['genre1'] }"}
               </mark></p>
