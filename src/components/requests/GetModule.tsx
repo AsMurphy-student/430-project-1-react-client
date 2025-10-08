@@ -162,7 +162,7 @@ function GetModule(props: { queryURL: string, }) {
           }}>
               Submit
             </button>
-          <p className='text-white whitespace-pre-wrap'>{outputResult}</p>
+          <div className="overflow-y-scroll h-30"><p className='whitespace-pre-wrap'>{outputResult}</p></div>
         </div>
       }
     </>
