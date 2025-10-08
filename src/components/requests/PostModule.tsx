@@ -30,12 +30,24 @@ function AddBookInput(props: { query: string, bookObj: BookParams, setBookObj: R
     }
   }
   return (
-    <p className='text-white'>
-      <label>{query === 'genres' ? 'Genre (optional; use comma as separator)' : query}: </label>
+    <p>
+      <label>{query === 'genres' ? 'Genres (use , separator)' : query}: </label>
       <input
         name={`${query}-term`}
         id='term'
         value={renderValue(query)}
+        placeholder={query === 'genres' ? 'optional' : ''}
+        className='
+          w-fit
+          bg-gray-700 
+          hover:bg-gray-600 
+          active:bg-gray-500 
+          border-4 
+          border-stone-200 
+          active:border-stone-400 
+          rounded-lg 
+          p-1
+          mb-4'
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
           {
             if (query === 'pages' || query === 'year') {
@@ -83,13 +95,30 @@ function PostModule(props: { queryURL: string, }) {
 
   return (
     <>
-      <button className='text-white' onClick={() => {
-          setModuleState(!moduleState)
-        }}>{queryURL === "/addBook" ? `Add Book` : 'Add Genre'}</button>
-      <hr />
+      <button className='
+        w-fit
+        bg-gray-700 
+        hover:bg-gray-600 
+        active:bg-gray-500 
+        border-4 
+        border-stone-200 
+        active:border-stone-400 
+        rounded-lg 
+        p-1
+        mb-4'
+      onClick={() => {
+        setModuleState(!moduleState)
+      }}>{queryURL === "/addBook" ? `Add Book` : 'Add Genre'}</button>
       {
         moduleState && 
-        <div>
+        <div className='
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
           <fieldset>
             {
               queryURL === "/addBook" &&
@@ -108,11 +137,22 @@ function PostModule(props: { queryURL: string, }) {
               queryURL === "/addGenre" &&
               <>
                 <p className='text-white'>
-                  <label>title: </label>
+                  <label >title: </label>
                   <input
                     name={`title-genre-term`}
                     id='term'
                     value={title}
+                    className='
+                      w-fit
+                      bg-gray-700 
+                      hover:bg-gray-600 
+                      active:bg-gray-500 
+                      border-4 
+                      border-stone-200 
+                      active:border-stone-400 
+                      rounded-lg 
+                      p-1
+                      mb-4'
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
                       setTitle(event.target.value)}
                   />
@@ -123,6 +163,17 @@ function PostModule(props: { queryURL: string, }) {
                     name={`genre-genre-term`}
                     id='term'
                     value={genre}
+                    className='
+                      w-fit
+                      bg-gray-700 
+                      hover:bg-gray-600 
+                      active:bg-gray-500 
+                      border-4 
+                      border-stone-200 
+                      active:border-stone-400 
+                      rounded-lg 
+                      p-1
+                      mb-4'
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => 
                       setGenre(event.target.value)}
                   />
@@ -130,7 +181,18 @@ function PostModule(props: { queryURL: string, }) {
               </>
             }
           </fieldset>
-          <button className='text-white' onClick={async () => {
+          <button className='
+            w-fit
+            bg-gray-700 
+            hover:bg-gray-600 
+            active:bg-gray-500 
+            border-4 
+            border-stone-200 
+            active:border-stone-400 
+            rounded-lg 
+            p-1
+            mb-4'
+          onClick={async () => {
             let formData = '';
 
             if ((newBook.author === '' ||
@@ -178,9 +240,10 @@ function PostModule(props: { queryURL: string, }) {
               `Content-Length: ${response.headers.get('content-length')}\n` +
               `Response: [${JSON.stringify(obj)}]`;
             setOutputResult(output);
-            }}>
-              Working?
-            </button>
+            }}
+          >
+            Submit
+          </button>
           <p className='text-white whitespace-pre-wrap'>{outputResult}</p>
         </div>
       }

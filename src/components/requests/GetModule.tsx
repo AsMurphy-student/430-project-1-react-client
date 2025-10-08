@@ -35,12 +35,30 @@ function GetModule(props: { queryURL: string, }) {
 
   return (
     <>
-      <button className='text-white' onClick={() => {
-          setModuleState(!moduleState)
-        }}>{typeStruct[queryURL] ? `Get All Books By ${typeStruct[queryURL]}` : 'Get All Books'}</button>
+      <button className='
+        w-fit
+        bg-gray-700 
+        hover:bg-gray-600 
+        active:bg-gray-500 
+        border-4 
+        border-stone-200 
+        active:border-stone-400 
+        rounded-lg 
+        p-1
+        mb-4' 
+      onClick={() => {
+        setModuleState(!moduleState)
+      }}>{typeStruct[queryURL] ? `Get All Books By ${typeStruct[queryURL]}` : 'Get All Books'}</button>
       {
         moduleState && 
-        <div>
+        <div className='
+          bg-gray-700 
+          border-4 
+          border-stone-200
+          rounded-lg 
+          p-4
+          mb-4'
+        >
           <fieldset>
             <p className='text-white'>
               <input
@@ -73,12 +91,34 @@ function GetModule(props: { queryURL: string, }) {
                   name={`${queryURL}-term`}
                   id='term'
                   value={searchTerm}
+                  className='
+                      w-fit
+                      bg-gray-700 
+                      hover:bg-gray-600 
+                      active:bg-gray-500 
+                      border-4 
+                      border-stone-200 
+                      active:border-stone-400 
+                      rounded-lg 
+                      p-1
+                      mb-4'
                   onChange={searchTermOnChange}
                 />
               </p>
             }
           </fieldset>
-          <button className='text-white' onClick={async () => {
+          <button className='
+            w-fit
+            bg-gray-700 
+            hover:bg-gray-600 
+            active:bg-gray-500 
+            border-4 
+            border-stone-200 
+            active:border-stone-400 
+            rounded-lg 
+            p-1
+            mb-4'
+          onClick={async () => {
             const fetchURL = typeStruct[queryURL] 
             ? `${queryURL}?${typeStruct[queryURL]}=${searchTerm}`
             : `${queryURL}`;
@@ -119,13 +159,12 @@ function GetModule(props: { queryURL: string, }) {
 
               setOutputResult(output);
             }
-            }}>
-              Working?
+          }}>
+              Submit
             </button>
           <p className='text-white whitespace-pre-wrap'>{outputResult}</p>
         </div>
       }
-      <hr />
     </>
   );
 }

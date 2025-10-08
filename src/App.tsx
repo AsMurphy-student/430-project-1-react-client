@@ -40,15 +40,17 @@ function App() {
           </>
           :
           <>
-            <h1 className='text-3xl'>Project 1 Book API</h1>
+            <h1 className='text-3xl mb-4'>Project 1 Book API</h1>
 
-            <GetModule queryURL='/getBooks' />
-            <GetModule queryURL='/getBooksByTitle' />
-            <GetModule queryURL='/getBooksByAuthor' />
-            <GetModule queryURL='/getBooksByYear' />
+            <div className='flex flex-col'>
+              <GetModule queryURL='/getBooks' />
+              <GetModule queryURL='/getBooksByTitle' />
+              <GetModule queryURL='/getBooksByAuthor' />
+              <GetModule queryURL='/getBooksByYear' />
 
-            <PostModule queryURL='/addBook' />
-            <PostModule queryURL='/addGenre' />
+              <PostModule queryURL='/addBook' />
+              <PostModule queryURL='/addGenre' />
+            </div>
           </>
         }
       </div>
