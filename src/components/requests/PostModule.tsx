@@ -234,17 +234,26 @@ function PostModule(props: { queryURL: string, }) {
               body: formData,
             });
 
-            const obj = await response.json();
-            const output = 
-              `Status: ${response.status}\n` +
-              `Content-Length: ${response.headers.get('content-length')}\n` +
-              `Response: [${JSON.stringify(obj)}]`;
-            setOutputResult(output);
+            if (response.status === 204) {
+              const output = 
+                `Status: ${response.status}\n` +
+                `Content-Length: ${response.headers.get('content-length')}\n` +
+                `Response: No content from 204.`;
+              setOutputResult(output);
+            }
+            else {
+              const obj = await response.json();
+              const output = 
+                `Status: ${response.status}\n` +
+                `Content-Length: ${response.headers.get('content-length')}\n` +
+                `Response: [${JSON.stringify(obj)}]`;
+              setOutputResult(output);
+            }
             }}
           >
             Submit
           </button>
-          <p className='text-white whitespace-pre-wrap'>{outputResult}</p>
+          <div className="overflow-y-scroll h-30"><p className='whitespace-pre-wrap'>{outputResult}</p></div>
         </div>
       }
     </>
